@@ -17,15 +17,21 @@ function createUserTable() {
     return __awaiter(this, void 0, void 0, function* () {
         yield client.connect();
         const result = yield client.query(`
-        CREATE TABLE anotherUser (
+        CREATE TABLE address (
             id SERIAL PRIMARY KEY,
-            username VARCHAR(50) UNIQUE NOT NULL,
-            email VARCHAR(255) UNIQUE NOT NULL,
-            password VARCHAR(255) NOT NULL,
-            created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+            user_id INTEGER NOT NULL,
+            city VARCHAR(100) NOT NULL,
+            country VARCHAR(100) NOT NULL,
+            street VARCHAR(255) NOT NULL,
+            pincode VARCHAR(20),
+            created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
         );       
         `);
         console.log(result);
     });
 }
 createUserTable();
+// docker run -e POSTGRES_PASSWORD=m*se**ret*as*w**d -d -p 5432:5432 postgres
+// this command is used to run docker locally using docker
+// psql -h localhost -U postgres -d postgres
