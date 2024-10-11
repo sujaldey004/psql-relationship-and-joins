@@ -17,16 +17,7 @@ function createUserTable() {
     return __awaiter(this, void 0, void 0, function* () {
         yield client.connect();
         const result = yield client.query(`
-        CREATE TABLE address (
-            id SERIAL PRIMARY KEY,
-            user_id INTEGER NOT NULL,
-            city VARCHAR(100) NOT NULL,
-            country VARCHAR(100) NOT NULL,
-            street VARCHAR(255) NOT NULL,
-            pincode VARCHAR(20),
-            created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-        );       
+        INSERT INTO address (user_id, city, country, street, pincode) VALUES (2, 'JAMAICA', 'AFRICA', '123 Broadway St', '10101');       
         `);
         console.log(result);
     });

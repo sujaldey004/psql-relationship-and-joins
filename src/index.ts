@@ -7,16 +7,7 @@ const client = new Client({
 async function createUserTable(){
     await client.connect()
     const result = await client.query(`
-        CREATE TABLE address (
-            id SERIAL PRIMARY KEY,
-            user_id INTEGER NOT NULL,
-            city VARCHAR(100) NOT NULL,
-            country VARCHAR(100) NOT NULL,
-            street VARCHAR(255) NOT NULL,
-            pincode VARCHAR(20),
-            created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-        );       
+        INSERT INTO address (user_id, city, country, street, pincode) VALUES (2, 'JAMAICA', 'AFRICA', '123 Broadway St', '10101');       
         `)
 
         console.log(result);
@@ -24,6 +15,4 @@ async function createUserTable(){
 
 createUserTable();
 
-// docker run -e POSTGRES_PASSWORD=m*se**ret*as*w**d -d -p 5432:5432 postgres
-// this command is used to run docker locally using docker
-// psql -h localhost -U postgres -d postgres
+// delete cascade = means it user will delete then it's address will also be deleted
